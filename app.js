@@ -1,14 +1,17 @@
 const express = require("express") //requiring express package
 const app = express() // storing it in app app vanne variable throught use gareko
 
+
+app.set("view engine", "ejs")
+
 //  / ma gayo vane k dekhaune and request garepachhi response garnai parxa hai keta ho
 
 app.get('/',(req,res)=>{
-    res.send("hi there people")
+    res.send("home")
 })
 
 app.get('/about',(req,res)=>{
-    res.send("this is the about section show about you ")
+    res.render("this is the about section ")
 
 
 })
