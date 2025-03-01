@@ -1,5 +1,9 @@
 const express = require("express") //requiring express package
+const connectToDatabase = require("./database")
 const app = express() // storing it in app app vanne variable throught use gareko
+app.use(express.json())
+
+connectToDatabase()
 
 
 
@@ -11,12 +15,12 @@ app.get('/',(req,res)=>{
 })
 
 
-app.get('/contact', function(req,res){
+app.post("/blog",(req,res)=>{
+    console.log(req.body)
     res.status(200).json({
-        massege:"this massege from contact page hai"
+        massage : "blog api hit sucessfully"
     })
 })
-
 
 
 
@@ -25,3 +29,4 @@ app.listen(3000, function(){
 })
 
 
+//mongodb+srv://shahishisir087:<db_password>@cluster0.zgzr9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
