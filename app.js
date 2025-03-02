@@ -1,5 +1,7 @@
 const express = require("express") //requiring express package
 const connectToDatabase = require("./database")
+const Blog = require("./model/blogModel")
+
 const app = express() // storing it in app app vanne variable throught use gareko
 app.use(express.json())
 
@@ -15,10 +17,20 @@ app.get('/',(req,res)=>{
 })
 
 
-app.post("/blog",(req,res)=>{
-    console.log(req.body)
+app.post("/blog", async(req,res)=>{
+    const {title,subtitle,description,image} = req.body
+    if(!title || !subtitle || !description ||!image)
+        return res.status(400).json({
+    massage:"please provide title subtitle description and image"
+    })
+    await Blog.create({
+        title:title,
+        subtitle: subtitle,
+        description:description,
+        image:image
+    })
     res.status(200).json({
-        massage : "blog api hit sucessfully"
+        massage : "blog api hit successfully"
     })
 })
 

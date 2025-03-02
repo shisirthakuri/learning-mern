@@ -6,10 +6,10 @@ const blogSchema = new Schema({
         type : String,
     },
     subtitle :{
-        type : String,
+        type : String
     },
     description :{
-        type : Text,
+        type : String
     },
     image :{
         type : String
