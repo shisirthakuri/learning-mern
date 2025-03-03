@@ -25,6 +25,7 @@ app.get('/',(req,res)=>{
 
 app.post("/blog",upload.single('image'),async(req,res)=>{
       const {title,subtitle,description,image} = req.body
+      const filename = req.body.filename
       if(!title || !subtitle || !description ||!image)
      return 
      res.status(400).json({
@@ -34,9 +35,17 @@ app.post("/blog",upload.single('image'),async(req,res)=>{
          title:title,
          subtitle: subtitle,
          description:description,
-         image:image
+         image:filename
      })
-    console.log(req.body)
+     app.get("/blog", async (req,res)=>{
+        const blogs = await Blog.find()
+        res.status(200).json({
+            massage:"blogs fatch sucessfully",
+            data:blogs
+        })
+     })
+     app.use(express.static('./storage'))
+   
     res.status(200).json({
         massage : "blog api hit successfully"
     })
